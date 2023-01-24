@@ -33,7 +33,7 @@ func AddTransaction(w http.ResponseWriter, r *http.Request, t models.Transaction
 	}
 
 	// Check if transaction is older than 60 seconds
-	if time.Now().Sub(t.Timestamp) > time.Second*60 {
+	if time.Since(t.Timestamp) > time.Second*60 {
 		http.Error(w, "Transaction is older than 60 seconds", http.StatusNoContent)
 		return
 	}
